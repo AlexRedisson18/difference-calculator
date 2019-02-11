@@ -1,11 +1,22 @@
-install:
+install: install-deps
+
+run:
+	npx babel-node -- 'src/bin/hexlet.js' 10
+
+install-deps:
 	npm install
 
-start:
-	npx babel-node -- src/bin/brain-progression.js
+build:
+	rm -rf dist
+	npm run build
+
+test:
+	npm test
+
+lint:
+	npx eslint .
 
 publish:
 	npm publish
 
-lint:
-	npx eslint .
+.PHONY: test

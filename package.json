@@ -1,8 +1,10 @@
 {
-  "name": "differencecalculatorred18",
-  "version": "1.0.0",
-  "description": "second project",
-  "bin": {},
+  "name": "diffcalculatorred18",
+  "version": "1.0.3",
+  "description": "Compares two configuration files and shows a difference.",
+  "bin": {
+    "gendiff": "dist/bin/gendiff.js"
+  },
   "files": [
     "dist"
   ],
@@ -36,5 +38,8 @@
     "eslint": "^5.13.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.16.0"
+  },
+  "dependencies": {
+    "commander": "^2.19.0"
   }
 }

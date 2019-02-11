@@ -4,4 +4,7 @@
 [![Build Status](https://travis-ci.com/AlexRedisson18/project-lvl2-s417.svg?branch=master)](https://travis-ci.com/AlexRedisson18/project-lvl2-s417)
 
 ## How to install
+
 `sudo npm i -g diffcalculatorred18`
+
+[![asciicast](https://asciinema.org/a/SyJVS5aTQCGNf3D6q00444jLY.svg)](https://asciinema.org/a/SyJVS5aTQCGNf3D6q00444jLY)

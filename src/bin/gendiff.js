@@ -4,7 +4,7 @@ import program from 'commander';
 import { description, version } from '../../package.json';
 import genDiff from '..';
 
-program
+export default program
   .version(`${version}`, '-V, --version')
   .description(`${description}`)
   .option('-f --format [format]', 'Output format')
@@ -13,3 +13,5 @@ program
     console.log(genDiff(firstConfig, secondConfig));
   })
   .parse(process.argv);
+
+// замечание о неправильных одиночных ковычках сбилось - указывает на пустую строку

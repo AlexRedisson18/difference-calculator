@@ -1,49 +1,58 @@
 import fs from 'fs';
 import _ from 'lodash';
 
-const getAst = (obj1, obj2) => {
-  const combinesKeys = _.union(Object.keys(obj1), Object.keys(obj2));
-  return combinesKeys.map((key) => {
-    if (!_.has(obj1, key)) {
-      return { name: key, value1: obj2[key], type: 'added' };
-    }
-    if (!_.has(obj2, key)) {
-      return { name: key, value1: obj1[key], type: 'deleted' };
-    }
-    if (obj1[key] !== obj2[key]) {
+const getAst = (oldObj, newObj) => {
+  const unitedKeys = _.union(Object.keys(oldObj), Object.keys(newObj));
+  const ast = unitedKeys.map((key) => {
+    const oldValue = oldObj[key];
+    const newValue = newObj[key];
+
+    if (_.has(oldObj, key) && _.has(newObj, key)) {
+      if (oldValue === newValue) {
+        return { key, newValue, type: 'unchanged' };
+      }
       return {
-        name: key, value1: obj1[key], value2: obj2[key], type: 'updated',
+        key, oldValue, newValue, type: 'changed',
       };
     }
-    return { name: key, value1: obj1[key] };
+    if (!_.has(oldObj, key)) {
+      return { key, newValue, type: 'added' };
+    }
+    return { key, oldValue, type: 'deleted' };
   });
+  return ast;
 };
 
-const parser = (ast) => {
+const astToString = (ast) => {
   const result = ast.map((elem) => {
+    const space = '  ';
     const {
-      name, type, value1, value2,
+      key,
+      type,
+      oldValue,
+      newValue,
     } = elem;
 
     switch (type) {
       case 'added':
-        return `+ ${name}: ${value1}`;
-      case 'updated':
-        return [`+ ${name}: ${value1}`, `- ${name}: ${value2}`];
+        return `${space}+ ${key}: ${newValue}`;
+      case 'unchanged':
+        return `${space}  ${key}: ${newValue}`;
       case 'deleted':
-        return `- ${name}: ${value1}`;
+        return `${space}- ${key}: ${newValue}`;
+      case 'changed':
+        return [`${space}+ ${key}: ${newValue}`, `${space}- ${key}: ${oldValue}`];
       default:
-        return `  ${name}: ${value1}`;
+        return '';
     }
   });
-  return _.flatten(result).join('\n');
+  const rendered = _.flatten(result).join('\n');
+  return `{\n${rendered}\n}`;
 };
 
-const genDiff = (pathToFile1, pathToFile2) => {
+export default (pathToFile1, pathToFile2) => {
   const fileContent1 = JSON.parse(fs.readFileSync(pathToFile1, 'utf-8'));
   const fileContent2 = JSON.parse(fs.readFileSync(pathToFile2, 'utf-8'));
   const ast = getAst(fileContent1, fileContent2);
-  return parser(ast);
+  return astToString(ast);
 };
-
-export default genDiff;

@@ -1,0 +1,8 @@
+{
+    host: hexlet.io
+  + timeout: 20
+  - timeout: 50
+  - proxy: undefined
+  - follow: undefined
+  + verbose: true
+}

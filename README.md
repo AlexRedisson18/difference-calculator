@@ -8,3 +8,7 @@
 `sudo npm i -g diffcalculatorred18`
 
 [![asciicast](https://asciinema.org/a/SyJVS5aTQCGNf3D6q00444jLY.svg)](https://asciinema.org/a/SyJVS5aTQCGNf3D6q00444jLY)
+
+## How to use
+
+[![asciicast](https://asciinema.org/a/4Bh084JIqovimHuUYni8583oj.svg)](https://asciinema.org/a/4Bh084JIqovimHuUYni8583oj)

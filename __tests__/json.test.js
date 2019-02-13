@@ -22,3 +22,13 @@ test('yaml simple diff test', () => {
 
   expect(actualData).toBe(comparedData);
 });
+
+test('ini simple diff test', () => {
+  const path1 = `${commonPath}before.ini`;
+  const path2 = `${commonPath}after.ini`;
+
+  const actualData = genDiff(path1, path2);
+  const comparedData = fs.readFileSync(`${commonPath}result.txt`, 'utf-8');
+
+  expect(actualData).toBe(comparedData);
+});

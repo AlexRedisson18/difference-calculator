@@ -3,49 +3,49 @@ import path from 'path';
 import _ from 'lodash';
 import parse from './parser';
 
-const getAst = (oldObj, newObj) => {
-  const unitedKeys = _.union(Object.keys(oldObj), Object.keys(newObj));
+const getAst = (obj1, obj2) => {
+  const unitedKeys = _.union(Object.keys(obj1), Object.keys(obj2));
   const ast = unitedKeys.map((key) => {
-    const oldValue = oldObj[key];
-    const newValue = newObj[key];
+    const valueBefore = obj1[key];
+    const valueAfter = obj2[key];
 
-    if (_.has(oldObj, key) && _.has(newObj, key)) {
-      if (oldValue === newValue) {
-        return { key, newValue, type: 'unchanged' };
+    if (_.has(obj1, key) && _.has(obj2, key)) {
+      if (valueBefore === valueAfter) {
+        return { key, valueAfter, type: 'unchanged' };
       }
       return {
-        key, oldValue, newValue, type: 'changed',
+        key, valueBefore, valueAfter, type: 'changed',
       };
     }
-    if (!_.has(oldObj, key)) {
-      return { key, newValue, type: 'added' };
+    if (!_.has(obj1, key)) {
+      return { key, valueAfter, type: 'added' };
     }
-    return { key, oldValue, type: 'deleted' };
+    return { key, valueBefore, type: 'deleted' };
   });
 
   return ast;
 };
 
 
-const astToString = (ast) => {
+const render = (ast) => {
   const result = ast.map((elem) => {
     const space = '  ';
     const {
       key,
       type,
-      oldValue,
-      newValue,
+      valueBefore,
+      valueAfter,
     } = elem;
 
     switch (type) {
       case 'added':
-        return `${space}+ ${key}: ${newValue}`;
+        return `${space}+ ${key}: ${valueAfter}`;
       case 'unchanged':
-        return `${space}  ${key}: ${newValue}`;
+        return `${space}  ${key}: ${valueAfter}`;
       case 'changed':
-        return [`${space}+ ${key}: ${newValue}`, `${space}- ${key}: ${oldValue}`];
+        return [`${space}+ ${key}: ${valueAfter}`, `${space}- ${key}: ${valueBefore}`];
       default:
-        return `${space}- ${key}: ${newValue}`;
+        return `${space}- ${key}: ${valueAfter}`;
     }
   });
   const rendered = _.flatten(result).join('\n');
@@ -63,5 +63,5 @@ export default (pathToFile1, pathToFile2) => {
 
   const ast = getAst(data1, data2);
 
-  return astToString(ast);
+  return render(ast);
 };

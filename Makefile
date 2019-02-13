@@ -1,8 +1,10 @@
 install: install-deps
 
-run:
-	npx babel-node -- src/bin/gendiff.js /home/user/differenceCalculatorRed18/src/__tests__/__fixtures__/before.json /home/user/differenceCalculatorRed18/src/__tests__/__fixtures__/after.json
+json:
+	npx babel-node -- src/bin/gendiff.js /home/user/differenceCalculatorRed18/__tests__/__fixtures__/before.json /home/user/differenceCalculatorRed18/__tests__/__fixtures__/after.json
 
+yaml:
+	npx babel-node -- src/bin/gendiff.js /home/user/differenceCalculatorRed18/__tests__/__fixtures__/before.yaml /home/user/differenceCalculatorRed18/__tests__/__fixtures__/after.yaml
 
 install-deps:
 	npm install

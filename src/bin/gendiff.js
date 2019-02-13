@@ -13,5 +13,3 @@ export default program
     console.log(genDiff(firstConfig, secondConfig));
   })
   .parse(process.argv);
-
-// замечание о неправильных одиночных ковычках сбилось - указывает на пустую строку

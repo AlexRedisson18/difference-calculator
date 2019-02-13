@@ -1,5 +1,7 @@
 import fs from 'fs';
+import path from 'path';
 import _ from 'lodash';
+import getParse from './parsers';
 
 const getAst = (oldObj, newObj) => {
   const unitedKeys = _.union(Object.keys(oldObj), Object.keys(newObj));
@@ -23,6 +25,7 @@ const getAst = (oldObj, newObj) => {
   return ast;
 };
 
+
 const astToString = (ast) => {
   const result = ast.map((elem) => {
     const space = '  ';
@@ -38,12 +41,10 @@ const astToString = (ast) => {
         return `${space}+ ${key}: ${newValue}`;
       case 'unchanged':
         return `${space}  ${key}: ${newValue}`;
-      case 'deleted':
-        return `${space}- ${key}: ${newValue}`;
       case 'changed':
         return [`${space}+ ${key}: ${newValue}`, `${space}- ${key}: ${oldValue}`];
       default:
-        return '';
+        return `${space}- ${key}: ${newValue}`;
     }
   });
   const rendered = _.flatten(result).join('\n');
@@ -51,8 +52,9 @@ const astToString = (ast) => {
 };
 
 export default (pathToFile1, pathToFile2) => {
-  const fileContent1 = JSON.parse(fs.readFileSync(pathToFile1, 'utf-8'));
-  const fileContent2 = JSON.parse(fs.readFileSync(pathToFile2, 'utf-8'));
+  const dataExtension = path.extname(pathToFile1);
+  const fileContent1 = getParse(fs.readFileSync(pathToFile1, 'utf-8'), dataExtension);
+  const fileContent2 = getParse(fs.readFileSync(pathToFile2, 'utf-8'), dataExtension);
   const ast = getAst(fileContent1, fileContent2);
   return astToString(ast);
 };

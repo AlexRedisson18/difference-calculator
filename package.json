@@ -1,6 +1,6 @@
 {
   "name": "diffcalculatorred18",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Compares two configuration files and shows a difference.",
   "bin": {
     "gendiff": "dist/bin/gendiff.js"
@@ -21,6 +21,9 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AlexRedisson18/project-lvl2-s417.git"
+  },
+  "jest": {
+    "testEnvironment": "node"
   },
   "author": "",
   "license": "ISC",

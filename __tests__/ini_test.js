@@ -12,3 +12,13 @@ test('ini flat diff test', () => {
 
    expect(actualData).toBe(comparedData);
 });
+
+test('ini tree diff test', () => {
+  const path1 = `${commonPath}before_tree.ini`;
+  const path2 = `${commonPath}after_tree.ini`;
+
+  const actualData = genDiff(path1, path2);
+  const comparedData = fs.readFileSync(`${commonPath}result_tree.txt`, 'utf-8');
+
+  expect(actualData).toBe(comparedData);
+});

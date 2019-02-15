@@ -9,6 +9,9 @@ json_tree:
 plain:
 	npx babel-node -- src/bin/gendiff.js --format plain __tests__/__fixtures__/before_tree.json __tests__/__fixtures__/after_tree.json
 
+json:
+	npx babel-node -- src/bin/gendiff.js --format json __tests__/__fixtures__/before_tree.json __tests__/__fixtures__/after_tree.json
+
 install-deps:
 	npm install
 

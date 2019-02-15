@@ -21,6 +21,7 @@ const treeini = ['before_tree.ini', 'after_tree.ini', 'result_tree.txt'];
 const plainJson = ['before_tree.json', 'after_tree.json', 'result_plain.txt', 'plain'];
 const plainYaml = ['before_tree.yaml', 'after_tree.yaml', 'result_plain.txt', 'plain'];
 const plainIni = ['before_tree.ini', 'after_tree.ini', 'result_plain.txt', 'plain'];
+const toJson = ['before_tree.json', 'after_tree.json', 'result_json.txt', 'json'];
 
 const testList = [
   flatIni,
@@ -32,6 +33,7 @@ const testList = [
   plainIni,
   plainJson,
   plainYaml,
+  toJson,
 ];
 
 test.each(testList)(

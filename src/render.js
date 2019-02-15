@@ -33,13 +33,10 @@ const stringify = (ast, depth = 0) => {
       case 'deleted':
         return `  ${space}- ${key}: ${valueToString(valueBefore, depth + 2)}`;
       default:
-        return console.log('Type is not defined');
+        throw new Error(`Render for "${type}" is not found`);
     }
   });
-
   const resultToStr = _.flatten(result).join('\n');
-
   return `{\n${resultToStr}\n${space}}`;
 };
-
 export default stringify;

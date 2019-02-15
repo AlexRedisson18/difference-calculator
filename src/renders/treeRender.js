@@ -3,7 +3,7 @@ import _ from 'lodash';
 const stringify = (ast, depth = 0) => {
   const space = ' '.repeat(depth * 2);
 
-  const valueToString = (value, currentDepth) => {
+  const elemToString = (value, currentDepth) => {
     const newSpace = ' '.repeat(currentDepth * 2);
     if (_.isObject(value)) {
       const result = _.keys(value).map(key => `${newSpace}  ${key}: ${value[key]}`).join('\n');
@@ -25,13 +25,13 @@ const stringify = (ast, depth = 0) => {
       case 'nested':
         return `  ${space}  ${key}: ${stringify(children, depth + 2)}`;
       case 'added':
-        return `  ${space}+ ${key}: ${valueToString(valueAfter, depth + 2)}`;
+        return `  ${space}+ ${key}: ${elemToString(valueAfter, depth + 2)}`;
       case 'unchanged':
-        return `  ${space}  ${key}: ${valueToString(valueAfter, depth + 2)}`;
+        return `  ${space}  ${key}: ${elemToString(valueAfter, depth + 2)}`;
       case 'changed':
-        return [`  ${space}+ ${key}: ${valueToString(valueAfter, depth + 2)}`, `  ${space}- ${key}: ${valueToString(valueBefore, depth + 2)}`];
-      case 'deleted':
-        return `  ${space}- ${key}: ${valueToString(valueBefore, depth + 2)}`;
+        return [`  ${space}+ ${key}: ${elemToString(valueAfter, depth + 2)}`, `  ${space}- ${key}: ${elemToString(valueBefore, depth + 2)}`];
+      case 'removed':
+        return `  ${space}- ${key}: ${elemToString(valueBefore, depth + 2)}`;
       default:
         throw new Error(`Render for "${type}" is not found`);
     }

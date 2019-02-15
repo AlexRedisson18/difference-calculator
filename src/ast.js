@@ -24,7 +24,7 @@ const makeAst = (obj1, obj2) => {
       return { key, valueAfter, type: 'added' };
     }
     if (!_.has(obj2, key)) {
-      return { key, valueBefore, type: 'deleted' };
+      return { key, valueBefore, type: 'removed' };
     }
     throw new Error(`Failed to find ${key} in ${obj1}, ${obj2}`);
   });

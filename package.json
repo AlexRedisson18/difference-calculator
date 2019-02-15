@@ -23,8 +23,7 @@
     "url": "git+https://github.com/AlexRedisson18/project-lvl2-s417.git"
   },
   "jest": {
-    "testEnvironment": "node",
-    "collectCoverage": true
+    "testEnvironment": "node"
   },
   "author": "",
   "license": "ISC",

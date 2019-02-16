@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import parse from './parser';
 import makeAst from './ast';
-import render from './renders';
+import render from './renderers';
 
 export default (pathToFile1, pathToFile2, format) => {
   const dataExtension1 = path.extname(pathToFile1);

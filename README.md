@@ -12,3 +12,5 @@
 ## How to use
 
 [![asciicast](https://asciinema.org/a/4Bh084JIqovimHuUYni8583oj.svg)](https://asciinema.org/a/4Bh084JIqovimHuUYni8583oj)
+
+[![asciicast](https://asciinema.org/a/UPht5LI0YTZqizB0M0D4y6YeC.svg)](https://asciinema.org/a/UPht5LI0YTZqizB0M0D4y6YeC)
